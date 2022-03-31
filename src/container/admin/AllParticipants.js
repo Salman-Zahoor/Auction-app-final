@@ -64,14 +64,16 @@ const AllParticipnats = ({ route, navigation }) => {
             }
         })
     }
-
+        
     const logout = () => {
         firebase.auth().signOut()
     }
     const renderBeforeWinng = (value) => {
+        console.log(value.image,"image");        
         return (
             <TouchableOpacity style={isclick.uuid == value.uuid ? styles.selectcardview : styles.cardview} onPress={_ => select(value)}>
-                <FontAwesome5 name="user-alt" size={20} color="white" style={styles.icon} />
+               {value.image.length >0 ?<Image source={{uri:value.image}} style={{height:40,width:40,borderRadius:20}}/>
+                :<FontAwesome5 name="user-alt" size={20} color="white" style={styles.icon} />}
                 <Text style={styles.text} >
                 {value.name}
 

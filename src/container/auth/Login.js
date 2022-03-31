@@ -139,7 +139,7 @@ const renderTextInputs=(placeholder,type,secureTextEntry)=>{
         <View>
             <Header heading="SignIn"/>
             <View style={styles.mainheading}>
-            <Image style={styles.image} source={require("../../assets/profile.png")}/>
+            <Image style={styles.image} source={require("../../assets/logo.png")}/>
                 <Text style={styles.mainheadingText1}>
                 Welcome Back
                 </Text>
@@ -194,9 +194,9 @@ const styles=StyleSheet.create({
         color:globalfontcolor
     },
     image:{
-        height:100,
-        width:100,
-        marginTop:vh*0.06,
+        height:150,
+        width:150,
+        marginTop:vh*0.01,
     }
 
 

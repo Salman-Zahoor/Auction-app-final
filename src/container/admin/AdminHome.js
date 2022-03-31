@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, TouchableWithoutFeedbackBase, TouchableWithoutFeedback } from "react-native";
 import { AuctionButton, Button, Header } from "../../components";
-import { vh, vw, butoncolor } from "../../constants";
+import { vh, vw, butoncolor, headerbackground } from "../../constants";
 import firebase from "firebase";
 
 const AdminHome = ({ navigation }) => {
@@ -49,8 +49,6 @@ const AdminHome = ({ navigation }) => {
 
 
                     </View>
-                    <Button heading="Create" color="black" marginVertical={20} onPress={() => navigation.navigate("CreateAuction")} />
-                    <Button heading="Logout" color="black" marginVertical={20} onPress={logout} />
                 </View>
             </ScrollView>
             </View>
@@ -64,7 +62,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     cardview: {
-        backgroundColor: "white",
+        backgroundColor:headerbackground,
         height: vh * 0.3,
         width: vw * 0.9,
         marginVertical: vh * 0.02,

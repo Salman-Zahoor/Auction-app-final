@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import { Text,View,Image,StyleSheet,ScrollView, TouchableOpacity, TouchableWithoutFeedbackBase, TouchableWithoutFeedback } from "react-native";
 import { AuctionButton, Button, Header } from "../../components";
-import { vh, vw ,butoncolor} from "../../constants";
+import { vh, vw ,butoncolor, headerbackground} from "../../constants";
 import firebase from "firebase";
 
 const Home=({navigation})=>{
@@ -37,7 +37,7 @@ const Home=({navigation})=>{
             firebaseKey:values})}>
             <View style={styles.cardview}>
                 <Image source={{uri:array[values].image}} style={styles.image}/>
-                <AuctionButton heading={array[values].title} color={butoncolor} />
+                <AuctionButton heading={array[values].title} />
             </View>
             </TouchableWithoutFeedback>
             )
@@ -60,7 +60,7 @@ export default Home
         alignItems:"center"
      },
      cardview:{
-         backgroundColor:"white",
+         backgroundColor:headerbackground,
          height:vh*0.3,
          width:vw*0.9,
          marginVertical:vh*0.02,

@@ -90,8 +90,9 @@ const getImage=(images)=>{
             <Header heading="Register"/>
 
             <View style={styles.mainheading}>
+            <Image style={styles.logo} source={require("../../assets/logo.png")}/>
             <Text style={styles.mainheadingText1}>
-                Welcome
+                Welcome TO Auction App
                 </Text>
                 <Text style={styles.mainheadingText}>
                     Register to  Continue
@@ -151,6 +152,11 @@ const styles=StyleSheet.create({
         height:100,
         width:100,
         marginTop:vh*0.06,
+    },
+    logo:{
+        height:150,
+        width:150,
+        marginTop:vh*0.01,
     }
 
 

@@ -6,7 +6,7 @@ const Header=({heading,imageUri,onPress,Press,salman})=>{
     return(
         <View style={styles.container}>
             <TouchableOpacity style={styles.imageView} onPress={onPress}>
-            <Image source={imageUri} style={{height:30,width:30,}} />
+            <Image source={imageUri} style={{height:30,width:30,marginTop:10}} />
             </TouchableOpacity>
             <Text style={styles.textstyle}>
                 {heading}
@@ -22,16 +22,16 @@ const Header=({heading,imageUri,onPress,Press,salman})=>{
 
 const styles=StyleSheet.create({
     container:{
-        height:vh*0.08,
+        height:vh*0.09,
         backgroundColor:headerbackground,
         alignItems:"center",
-        marginTop:20,
         flexDirection:"row"
     },
     textstyle:{
         color:headertextcolor,
         fontSize:headerfont,
         fontWeight:"bold",
+        marginTop:10
 
     },
     touchabletext:{

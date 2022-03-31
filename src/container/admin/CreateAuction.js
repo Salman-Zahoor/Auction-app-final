@@ -3,14 +3,20 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import { ImagePickers, TextInputs, Button, RichTextEditor, Header } from '../../components'
 import { vh, vw } from '../../constants'
 import firebase from 'firebase'
-import whatsapp from "../../assets/facebook.png"
-const CreateAuction = ({ navigation: { navigate ,goBack} },props) => {
+import whatsapp from "../../assets/facebook.jpg"
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from "moment"
+
+
+const CreateAuction = ({ navigation: { navigate ,goBack} }) => {
     const [inputs, setInputs] = useState({
         title: "",
         description: "",
         price:"",
-        date:"",
     })
+    const [date, setDate] = useState("")
+    const [open, setOpen] = useState(false)
+    const [markedDate, setMarkedDate] = useState(moment(date).format("YYYY-MM-DD"))
 
     const onChangeHandler = (name, value) => {
         setInputs({
@@ -18,12 +24,10 @@ const CreateAuction = ({ navigation: { navigate ,goBack} },props) => {
             [name]: value
         })
     }
-    // const [title, setTitle] = useState("")
-    // const [description, setDescription] = useState("")
+    
     const [image, setImage] = useState()
 
-    // console.log(title, description, image, "States");
-
+    
     const postAuction = () => {
         let id=firebase.auth().currentUser.uid
     firebase.database().ref(`AdminAuction`)
@@ -31,8 +35,8 @@ const CreateAuction = ({ navigation: { navigate ,goBack} },props) => {
             title:inputs.title,
             description:inputs.description,
             price:inputs.price,
-            date:inputs.date,
-            image
+            image,
+            today
         })
         .then(response =>{
             alert("Attend");
@@ -72,6 +76,27 @@ const getImage=(images)=>{
     }).catch(err => console.log(err))
 }
 
+const hideDatePicker = () => {
+    setOpen(false);
+};
+
+const handleConfirm = (date) => {
+
+    console.warn("A date has been picked: ", date);
+    setDate(date)
+    hideDatePicker();
+};
+
+console.log(typeof date, date, "DATEEEEEEEEE");
+
+const logoutUser = () => {
+    firebase.auth().signOut();
+
+    // console.log(remove, "LOGOUT");
+}
+
+ const today = moment(date).format("DD-MM-YYYY");
+
 
 
     
@@ -80,9 +105,9 @@ const getImage=(images)=>{
         <Header heading="Create Auction" />
             <ScrollView contentContainerStyle={Styles.container}>
                 <View >
-                <ImagePickers title="Upload Prfile" width={vw*0.9} height={vh*0.2} borderRadius={10} Topmargin={vh*0.03} imagesrc={whatsapp} 
-                 getImage={getImage}
-                hight={vh*0.2} wide={vw*0.9} radius={10}
+                <ImagePickers  width={vw*0.8} height={vh*0.2} borderRadius={10} marginTop={vh*0.02} imagesrc={whatsapp} 
+                 hight={vh*0.2} wide={vw*0.8} radius={10} marginLeft={vw*0.07} leftmargin={vw*0.07}
+                getImage={getImage}
                 />
 
                 </View>
@@ -119,11 +144,23 @@ const getImage=(images)=>{
                 </View>
                 <View style={{ marginHorizontal:10}}>
                     <TextInputs
-                        value={inputs.date}
-                        onChangeText={(text) => onChangeHandler("date", text)}
+                        value={today}
+                        onChangeText={(text) => onChangeHandler(text)}
                         placeholder="Date"
                         />
                 </View>
+                <View style={{marginTop:vh*0.05}}>     
+                <Button heading="Choose Date" color="black" onPress={() => setOpen(!open)} />
+                </View>
+            <DateTimePickerModal
+                isVisible={open}
+                mode="date"
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
+            />
+
+
+
                 <View style={{marginTop:vh*0.05}}>
                 <Button color="black" heading="Create" onPress={postAuction}/>
                 </View>
@@ -135,7 +172,7 @@ const getImage=(images)=>{
 
 const Styles = StyleSheet.create({
     container: {
-        flex: 1
+        flexGrow: 1
     }
 })
 

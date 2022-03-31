@@ -3,7 +3,7 @@ import { Text, View, Image, StyleSheet } from "react-native";
 import { Button, Header, AuctionDetailView, AuctionButton } from "../../components";
 import { butoncolor, vh, vw } from "../../constants";
 import firebase from "firebase";
-
+import arrow from "../../assets/arraw.png"
 
 const AuctionDetail = ({ route,navigation}) => {
 
@@ -13,7 +13,7 @@ const AuctionDetail = ({ route,navigation}) => {
         title,
         description,
         price,
-        date,
+        today,
         image,
     } = post
 
@@ -52,7 +52,7 @@ const AuctionDetail = ({ route,navigation}) => {
                 title,
                 description,
                 price,
-                date,
+                today,
                 id,
                 eventID: firebaseKey,
                 image
@@ -76,15 +76,15 @@ const AuctionDetail = ({ route,navigation}) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <Header heading="AuctionDetail" />
+             <Header heading="AuctionDetail"  imageUri={arrow} onPress={()=>navigation.navigate("Home")}/>
             <View style={styles.mainview}>
                 <View style={styles.cardview}>
                     <Image source={{uri:image}} style={styles.image}/>
                     <AuctionButton titles="Title : " heading={title} color={butoncolor} />
                     <AuctionDetailView titles="Description : " heading={description} color={butoncolor} />
                     <AuctionButton titles="Price : " heading={price} color={butoncolor} marginVertical={10} />
-                    <AuctionButton titles="Date : " heading={date} color={butoncolor} marginVertical={5} />
-                    {post.isWon ? <Text>Winner has been announced </Text> : eventParticipants.includes(firebase.auth().currentUser.uid) ? <Text>You have already participated</Text> :
+                    <AuctionButton titles="Date : " heading={today} color={butoncolor} marginVertical={5} />
+                    {post.isWon ? <Text style={{textAlign:"center"}}>Winner has been announced </Text> : eventParticipants.includes(firebase.auth().currentUser.uid) ? <Text style={{textAlign:"center"}}>You have already participated</Text> :
                         <Button heading="Participate" color="black" marginVertical={30} onPress={handleParticipate} />
                     }
 
